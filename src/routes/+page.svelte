@@ -9,6 +9,19 @@
   let drawDate: Date;
   let prizes = ["", "", ""];
 
+  // TODO: Remove this once done testing
+  quantity = 25;
+  price = 10;
+  start = 5061;
+  event = "LAY Day";
+  drawDate = new Date("2024-06-04");
+  prizes = [
+    "Phillips Air fryer",
+    "Russell Hobbs Steam Iron",
+    "Platinum Glass S/S Cordless Kettle",
+    "3 Tier Serving Platter",
+  ];
+
   function addPrizeSlot() {
     prizes.push("");
     prizes = prizes;  // trigger reactivity
@@ -18,23 +31,6 @@
     prizes.splice(index, 1);
     prizes = prizes;
   }
-
-  function getDisplayStart() {
-    if (start === null)
-      return "0000";
-
-    if (start < 1000) {
-      let padding = "";
-      for (let i = 0; i < (4 - `${start}`.length); i++)
-        padding += "0";
-
-      return `${padding}${start}`;
-    }
-
-    return start.toString();
-  }
-
-  $: displayStart = (start || true) ? getDisplayStart() : null;
 
   function generateTickets() {
 
@@ -87,7 +83,7 @@
   <div id="preview">
     <Ticket
       {event}
-      {displayStart}
+      id={start}
       {price}
       {drawDate}
       {prizes} />
