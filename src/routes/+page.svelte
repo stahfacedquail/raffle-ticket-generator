@@ -1,5 +1,6 @@
 <script lang="ts">
-    import { getOrdinalSuffix } from "$lib/utils";
+  import Ticket from "$lib/ui/Ticket.svelte";
+  import { getOrdinalSuffix } from "$lib/utils";
 
   let quantity: number;
   let price: number;
@@ -30,7 +31,7 @@
       return `${padding}${start}`;
     }
 
-    return start;
+    return start.toString();
   }
 
   $: displayStart = (start || true) ? getDisplayStart() : null;
@@ -84,32 +85,17 @@
   </form>
 
   <div id="preview">
-    <div id="ticket">
-      <div>{displayStart}</div>
-      <div>
-        <img src="amec-logo.png" alt="AME Church logo" width=100 />
-      </div>
-      <div>{displayStart}</div>
-    </div>
+    <Ticket
+      {event}
+      {displayStart}
+      {price}
+      {drawDate}
+      {prizes} />
   </div>
 </div>
 
 <style>
   div.container {
     display: flex;
-  }
-
-  div#ticket {
-    display: grid;
-    grid-template-columns: 1fr 3fr 2fr;
-  }
-
-  div#ticket > div {
-    border: 2px solid black;
-    border-right: none;
-  }
-
-  div#ticket > div:last-child {
-    border-right: 2px solid black;
   }
 </style>
