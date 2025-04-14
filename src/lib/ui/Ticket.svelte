@@ -1,5 +1,27 @@
+<script lang="ts" context="module">
+  type TicketParams = {
+    quantity: number;
+    price: number;
+    start: number;
+    event: string;
+    drawDate: Date;
+    prizes: string[];
+  };
+
+  let params: Readable<TicketParams>;
+
+  export const setTicketParams = (p: TicketParams) => {
+    params = readable(p);
+  };
+
+  export const getTicketParams = () => {
+    return params;
+  };
+</script>
+
 <script lang="ts">
   import { getOrdinalSuffix } from "$lib/utils";
+    import { readable, type Readable } from "svelte/store";
 
   export let id: number | null;
   export let price: number;
@@ -130,7 +152,7 @@
     position: absolute;
     top: 3px;
     left: 3px;
-    height: 2rem;
+    height: 2.25rem;
   }
 
   div.ticket > div:nth-child(2) > h1,
